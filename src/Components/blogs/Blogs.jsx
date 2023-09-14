@@ -7,6 +7,8 @@ const Blogs = () => {
     // eslint-disable-next-line no-unused-vars
     const [blogs, setBlogs] = useState([])
     const [carts, setCarts] = useState([])
+    const [totalTime, setTotalTime] = useState(0)
+    const [remaining, setRemaining] = useState(0)
     useEffect( () =>{
         fetch('data.json')
         .then(res => res.json())
@@ -18,10 +20,26 @@ const Blogs = () => {
     const handleCarSection = (cart) =>{
 
         const isShowCart = carts.find(name => name.id === cart.id);
+        let times = cart.time_in_hours
+        const remainingHour = 20;
         if(isShowCart){
             return alert('this cart is already selected')
         }
         else{
+            carts.map(time =>{
+                times = times + time.time_in_hours
+            })
+            const remainingTime = remainingHour - times
+            if(times > remainingHour){
+                return alert('ar somoy nai')
+            }
+            else{
+                setTotalTime(times)
+                setRemaining(remainingTime)
+            }
+
+           
+
             const newCarts = [...carts, cart]
             setCarts(newCarts)
         }
@@ -61,13 +79,13 @@ const Blogs = () => {
 
         <div className="w-3/12  shadow-2xl h-fit p-5">
         <div className="pb-5">
-            <h1 className="font-bold text-xl pb-4">Course name</h1>
+            
             {
-                <Cart carts ={carts}></Cart>
+                <Cart carts ={carts} totalTime={totalTime} remaining={remaining}></Cart>
             }
 
         </div>
-        <hr />
+       
         </div>
        </div>
     );
