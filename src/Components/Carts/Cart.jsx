@@ -1,11 +1,23 @@
+import PropTypes from 'prop-types';
 
-
-const Cart = () => {
+const Cart = ({carts}) => {
     return (
-        <div className="w-2/12">
-            <h1>cart</h1>
+        <div>
+            {
+                carts.map((cart, idx) =>(
+                    <div key={idx} >
+                   <div >
+                   <p className='text-gray-500 py-1'> {cart.title} </p>
+                   </div>
+                </div> 
+                ))
+            }
+        
         </div>
     );
 };
-
+Cart.propTypes = { 
+    carts: PropTypes.array
+   
+}
 export default Cart;

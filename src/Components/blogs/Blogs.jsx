@@ -1,10 +1,12 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import profile from '../../assets/Frame.svg'
+import Cart from "../Carts/Cart";
 
 const Blogs = () => {
     // eslint-disable-next-line no-unused-vars
     const [blogs, setBlogs] = useState([])
+    const [carts, setCarts] = useState([])
     useEffect( () =>{
         fetch('data.json')
         .then(res => res.json())
@@ -12,8 +14,25 @@ const Blogs = () => {
     }, [])
 
 
+
+    const handleCarSection = (cart) =>{
+
+        const isShowCart = carts.find(name => name.id === cart.id);
+        if(isShowCart){
+            return alert('this cart is already selected')
+        }
+        else{
+            const newCarts = [...carts, cart]
+            setCarts(newCarts)
+        }
+       
+      
+    }
+
     return (
-        <div className="w-10/12">
+       <div className='flex gap-8'>
+        {/* blog section */}
+         <div className="w-9/12">
             <div className="blogs grid grid-cols-3 gap-5 ">
                 {
                     blogs.map((blog, idx) =>(
@@ -29,7 +48,7 @@ const Blogs = () => {
                            </div>
                         </div>
                       <div className="pt-2 text-center">
-                      <button className="w-11/12 rounded-md bg-blue-600 py-1 text-white text-normal ">Select</button>
+                      <button onClick={ ()=>handleCarSection(blog)} className="w-11/12 rounded-md bg-blue-600 py-1 text-white text-normal ">Select</button>
                       </div>
                       </div>
 
@@ -37,6 +56,20 @@ const Blogs = () => {
                 }
             </div>
         </div>
+       {/* cart section */}
+
+
+        <div className="w-3/12  shadow-2xl h-fit p-5">
+        <div className="pb-5">
+            <h1 className="font-bold text-xl pb-4">Course name</h1>
+            {
+                <Cart carts ={carts}></Cart>
+            }
+
+        </div>
+        <hr />
+        </div>
+       </div>
     );
 };
 
