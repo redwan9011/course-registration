@@ -75,6 +75,7 @@ const Blogs = () => {
                       <ToastContainer 
                       position="top-center"
                       autoClose={3000}
+                      closeOnClick
                       />
                       </div>
                       </div>
