@@ -10,6 +10,7 @@ const Blogs = () => {
     // eslint-disable-next-line no-unused-vars
     const [blogs, setBlogs] = useState([])
     const [carts, setCarts] = useState([])
+    
     const [totalTime, setTotalTime] = useState(0)
     const [remaining, setRemaining] = useState(20)
     useEffect( () =>{
@@ -39,6 +40,7 @@ const Blogs = () => {
                 return toast("not allow to over 20 hour")
             }
             else{
+
                 setTotalTime(times)
                 setRemaining(remainingTime)
             }
