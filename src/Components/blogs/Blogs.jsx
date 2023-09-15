@@ -3,12 +3,15 @@ import { useState } from "react";
 import profile from '../../assets/Frame.svg'
 import Cart from "../Carts/Cart";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Blogs = () => {
     // eslint-disable-next-line no-unused-vars
     const [blogs, setBlogs] = useState([])
     const [carts, setCarts] = useState([])
     const [totalTime, setTotalTime] = useState(0)
-    const [remaining, setRemaining] = useState(0)
+    const [remaining, setRemaining] = useState(20)
     useEffect( () =>{
         fetch('data.json')
         .then(res => res.json())
@@ -22,16 +25,18 @@ const Blogs = () => {
         const isShowCart = carts.find(name => name.id === cart.id);
         let times = cart.time_in_hours
         const remainingHour = 20;
+        
         if(isShowCart){
-            return alert('this cart is already selected')
+            return toast("This cart is already selected")
         }
         else{
             carts.map(time =>{
                 times = times + time.time_in_hours
             })
             const remainingTime = remainingHour - times
-            if(times > remainingHour){
-                return alert('ar somoy nai')
+          
+            if(times > remainingHour || remainingTime  < 0){
+                return toast("not allow to over 20 hour")
             }
             else{
                 setTotalTime(times)
@@ -67,6 +72,10 @@ const Blogs = () => {
                         </div>
                       <div className="pt-2 text-center">
                       <button onClick={ ()=>handleCarSection(blog)} className="w-11/12 rounded-md bg-blue-600 py-1 text-white text-normal ">Select</button>
+                      <ToastContainer 
+                      position="top-center"
+                      autoClose={3000}
+                      />
                       </div>
                       </div>
 
