@@ -13,7 +13,7 @@ const Cart = ({carts, totalTime, remaining}) => {
                 carts.map((cart, idx) =>(
                     <div key={idx} >
                    <div >
-                   <p className='text-gray-500 py-1'>{cart.id} {cart.title} </p>
+                   <p className='text-gray-500 py-1'>{idx + 1}. {cart.title} </p>
                    
                    </div>
                   

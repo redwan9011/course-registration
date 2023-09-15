@@ -57,6 +57,7 @@ const Blogs = () => {
         {/* blog section */}
          <div className="w-9/12">
             <div className="blogs grid grid-cols-3 gap-5 ">
+                {/* blog part */}
                 {
                     blogs.map((blog, idx) =>(
                       <div key={idx} className="shadow-2xl bg-white px-3 py-5 space-y-2 rounded-md">
@@ -65,7 +66,7 @@ const Blogs = () => {
                         <p className="text-gray-600"> {blog.mini_text} </p>
                         <div className="flex justify-between text-xl text-gray-800 ">
                             <small>$ price: {blog.price}</small>
-                           <div className="flex gap-2">
+                           <div className="flex gap-2 items-center">
                            <img src={profile} alt="" />
                             <small>  Credit:  {blog.time_in_hours}hr</small>
                            </div>
